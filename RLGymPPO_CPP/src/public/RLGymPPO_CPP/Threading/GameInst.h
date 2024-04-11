@@ -23,7 +23,8 @@ namespace RLGPC {
 		uint64_t totalSteps;
 
 		float curEpRew = 0;
-		AvgTracker avgStepRew, avgEpRew;
+		float curEPLen = 0;
+		AvgTracker avgStepRew, avgEpRew, avgEpLen;
 
 		// Will be reset every iteration, when ResetMetrics() is called
 		Report _metrics = {};
