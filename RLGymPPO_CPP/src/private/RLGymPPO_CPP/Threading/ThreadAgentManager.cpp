@@ -78,16 +78,18 @@ RLGPC::GameTrajectory RLGPC::ThreadAgentManager::CollectTimesteps(uint64_t amoun
 }
 
 void RLGPC::ThreadAgentManager::GetMetrics(Report& report) {
-	AvgTracker avgStepRew, avgEpRew;
-	for (auto agent : agents) {
-		for (auto game : agent->gameInsts) {
-			avgStepRew += game->avgStepRew;
-			avgEpRew += game->avgEpRew;
-		}
-	}
-	
-	report["Average Step Reward"] = avgStepRew.Get();
-	report["Average Episode Reward"] = avgEpRew.Get();
+    AvgTracker avgStepRew, avgEpRew, avgEpLen;
+    for (auto agent : agents) {
+        for (auto game : agent->gameInsts) {
+            avgStepRew += game->avgStepRew;
+            avgEpRew += game->avgEpRew;
+            avgEpLen += game->avgEpLen;
+        }
+    }
+    
+    report["Average Step Reward"] = avgStepRew.Get();
+    report["Average Episode Reward"] = avgEpRew.Get();
+    report["Average Episode Length"] = avgEpLen.Get();
 
 	ThreadAgent::Times avgTimes = {};
 
