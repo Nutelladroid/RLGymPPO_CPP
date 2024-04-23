@@ -11,12 +11,6 @@ target_include_directories(RLGymSim_CPP PUBLIC "src/")
 set_target_properties(RLGymSim_CPP PROPERTIES LINKER_LANGUAGE CXX)
 set_target_properties(RLGymSim_CPP PROPERTIES CXX_STANDARD 20)
 
-# Include pybind11 as a subdirectory
-add_subdirectory(../pybind11 pybind11)
-
-# Link against pybind11 (assuming pybind11 builds a library)
-target_link_libraries(RLGymSim_CPP pybind11::pybind11)
-
 # Include RocketSim
 add_subdirectory("${PROJECT_SOURCE_DIR}/RocketSim")
 target_link_libraries(RLGymSim_CPP RocketSim)
